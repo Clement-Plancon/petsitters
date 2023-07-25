@@ -1,0 +1,20 @@
+/* Customization : Theme colors */
+$custom-colors: (
+  'primary' : $primary,
+//   'color3': $color3,
+//   'color4': $color4,
+//   'color5': $color5,
+//   'donation': $donation,
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+$spacer: 10px;
+$spacers: (
+  0: 0,
+  1: $spacer * 1,
+  2: $spacer * 2.25,
+  3: $spacer * 3,
+  4: $spacer * 5,
+  5: $spacer * 10,
+  6: $spacer * 15,
+);
