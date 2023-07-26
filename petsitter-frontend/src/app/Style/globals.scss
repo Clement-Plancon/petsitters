@@ -1,16 +1,17 @@
-@import '~bootstrap/scss/bootstrap';
-@import './bootstrap-themed.scss';
+@import "~bootstrap/scss/bootstrap";
+@import "./bootstrap-themed.scss";
 
 /* IMPORT STYLE COMPONENTS */
-@import './Components/Navbar.scss';
-@import './Components/Heros.scss';
-@import './Components/rehassuranceBar.scss';
-@import './Components/Presentation.scss';
-@import './Components/ModesPetSitting.scss';
-@import './Components/Footer.scss';
+@import "./Components/Navbar.scss";
+@import "./Components/Heros.scss";
+@import "./Components/rehassuranceBar.scss";
+@import "./Components/Presentation.scss";
+@import "./Components/ModesPetSitting.scss";
+@import "./Components/Footer.scss";
+@import "./Components/Connexion.scss";
 
 html,
 body {
   padding: 0;
   margin: 0;
-} 
+}

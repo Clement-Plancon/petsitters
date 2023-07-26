@@ -1,6 +1,8 @@
 .footer {
   background: $background;
   padding: 50px 0;
+  z-index: 10;
+  position: relative;
   .content-footer {
     display: flex;
     flex-direction: column;
