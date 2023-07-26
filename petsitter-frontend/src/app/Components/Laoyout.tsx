@@ -1,7 +1,22 @@
+// import NavbarHome from "./Navbar";
+
 import NavbarHome from "./Navbar";
 
-export default function Layout(){
-    return(
+
+type LayoutProps = {
+  children?: React.ReactNode;
+};
+
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <>
+      <header>
         <NavbarHome />
-    )
+      </header>
+      <main>
+       {children}
+      </main>
+      
+    </>
+  );
 }

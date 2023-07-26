@@ -1,12 +1,20 @@
-
-import './Style/globals.scss'
-import NavbarHome from './Components/Navbar'
-import Layout from './Components/Laoyout'
+"use client";
+import "./Style/globals.scss";
+import Layout from "./Components/Laoyout";
+import Hero from "./Components/Hero";
+import RehassuranceBar from "./Components/RehassuranceBar";
+import Presentation from "./Components/Presentation";
+import ModesPetSitting from "./Components/ModesPetSitting";
 
 export default function Home() {
   return (
     <>
-    <Layout />
+      <Layout>
+        <Hero />
+        <RehassuranceBar />
+        <Presentation />
+        <ModesPetSitting />
+      </Layout>
     </>
-  )
+  );
 }
