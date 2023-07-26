@@ -2,9 +2,8 @@
 import Image from "next/image";
 import { Button, Container, Form } from "react-bootstrap";
 import Layout from "../Components/Laoyout";
-import img_form from "../../../public/Images/img_connexion.jpg";
 import Link from "next/link";
-import img_test from "../../../public/Images/devenir-petsitter.jpg";
+import img_form from "../../../public/Images/devenir-petsitter.jpg";
 
 export default function Connexion() {
   return (
@@ -13,7 +12,7 @@ export default function Connexion() {
         <div className="content-form">
           <div className="img-form">
             <div className="overlay" />
-            <Image src={img_test} alt={""} />
+            <Image src={img_form} alt={""} />
           </div>
           <div className="form">
             <Form className="test">
