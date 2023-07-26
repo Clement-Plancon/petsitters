@@ -9,7 +9,7 @@
         background: white !important;
 
         @include media-breakpoint-up(lg){
-            height: auto;
+            height: inherit;
         }
             .navbar-brand{
                 padding: 0;
