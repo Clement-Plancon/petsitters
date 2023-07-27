@@ -21,6 +21,16 @@ export class UserService {
     return this.userRepository.findOne({ where: { firstName } });
   }
 
+  async getUser(userId: number): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new NotFoundException('Utilisateur introuvable');
+    }
+
+    return user;
+  }
+
   async updateUser(userId: number, userData: Partial<User>): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id: userId } });
 

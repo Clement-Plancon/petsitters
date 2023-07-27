@@ -1,6 +1,6 @@
 // user.controller.ts
 
-import { Body, Controller, Post, Param, Put } from '@nestjs/common';
+import { Body, Controller, Post, Param, Put, Get } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -11,6 +11,11 @@ export class UserController {
   @Post('register')
   async registerUser(@Body() userData: Partial<User>): Promise<User> {
     return this.userService.registerUser(userData);
+  }
+
+  @Get(':id')
+  async getUser(@Param('id') userId: number): Promise<User> {
+    return this.userService.getUser(userId);
   }
 
   @Put(':id')

@@ -1,6 +1,4 @@
 "use client";
-// Inscription.js (ou Inscription.jsx)
-
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
 import Layout from "../Components/Laoyout";
