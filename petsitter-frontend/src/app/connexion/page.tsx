@@ -79,7 +79,7 @@ export default function Connexion() {
                   <Form.Label>Mot de passe</Form.Label>
                   <Form.Control type="password" placeholder="Mot de passe"  name="password" />
                   <span className="forget_mdp">
-                    Mot de passe oublié ? <Link href={"#"}>Cliquez ici</Link>
+                    Mot de passe oublié ? <Link href={"/mdpoublie"}>Cliquez ici</Link>
                   </span>
                 </Form.Group>
                 <Button variant="primary" type="submit" className="btn-connection">
