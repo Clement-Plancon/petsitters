@@ -5,6 +5,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import Layout from "../Components/Laoyout";
 import Link from "next/link";
 import img_form from "../../../public/Images/devenir-petsitter.jpg";
+import jwtDecode from "jwt-decode"; // Import jwt-decode library
 
 export default function Connexion() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,12 +29,19 @@ export default function Connexion() {
       if (response.ok) {
         // Récupérer le token de la réponse
         const token = await response.text();
-        
-        // Stocker le token dans le stockage local (localStorage)
+
+        // Utiliser jwt-decode pour extraire le payload du token
+        const decodedToken: { sub: number; firstName: string } = jwtDecode(token);
+
+        // Extraire l'ID de l'utilisateur du payload du token
+        const userId = decodedToken.sub;
+
+        // Stocker le token et l'ID de l'utilisateur dans le stockage local (localStorage)
         localStorage.setItem("accessToken", token);
+        localStorage.setItem("userId", userId.toString());
 
         // Rediriger l'utilisateur vers la page de profil après la connexion
-        window.location.href = "/profil";
+        window.location.href = "/profil_user";
       } else {
         // Gérer les cas d'erreur
         const data = await response.json();
