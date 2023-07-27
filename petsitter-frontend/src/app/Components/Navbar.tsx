@@ -1,14 +1,27 @@
-"use client";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
-// import { createContext } from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
 export default function NavbarHome() {
+  const [isConnected, setIsConnected] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      setIsConnected(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    setIsConnected(false);
+    window.location.href = "/connexion";
+  };
+
   return (
     <section className="navbar-home">
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary ">
@@ -27,7 +40,11 @@ export default function NavbarHome() {
                 Trouver un Petsitter
               </Button>
               <Nav.Link href="/contacteznous">Nous contacter</Nav.Link>
-              <Nav.Link href="/connexion">Se connecter</Nav.Link>
+              {isConnected ? (
+                <Nav.Link onClick={handleLogout}>Déconnexion</Nav.Link>
+              ) : (
+                <Nav.Link href="/connexion">Se connecter</Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
