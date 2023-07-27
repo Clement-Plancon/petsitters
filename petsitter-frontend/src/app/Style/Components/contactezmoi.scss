@@ -1,0 +1,41 @@
+/* contact.scss */
+
+.contact-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .required-message {
+    font-size: 14px;
+    color: red;
+  }
+  
+  .contact-form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f0eded;
+  }
+  
+  .contact-form label {
+    font-weight: bold;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .submit-button {
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  

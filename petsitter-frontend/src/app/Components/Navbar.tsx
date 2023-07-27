@@ -26,7 +26,7 @@ export default function NavbarHome() {
               <Button variant="primary" as="a" className="btn-nav">
                 Trouver un Petsitter
               </Button>
-              <Nav.Link href="/nous-contacter">Nous contacter</Nav.Link>
+              <Nav.Link href="/contacteznous">Nous contacter</Nav.Link>
               <Nav.Link href="/connexion">Se connecter</Nav.Link>
             </Nav>
           </Navbar.Collapse>
