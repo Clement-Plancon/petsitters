@@ -10,7 +10,7 @@ export class EmailService {
   constructor() {
     // Configurer le transporter avec les informations SMTP de votre serveur Office 365
     this.transporter = nodemailer.createTransport({
-      host: '',
+      host: 'smtp.office365.com',
       port: 587,
       secure: false,
       auth: {
