@@ -12,12 +12,50 @@ export default function Contact() {
   const [telephone, setTelephone] = useState("");
   const [objet, setObjet] = useState("");
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-/*   const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Ajoutez ici le code pour envoyer les informations du formulaire au serveur
-    // Par exemple, vous pouvez utiliser Axios pour effectuer une requête POST
-  }; */
+
+    try {
+      // Envoyer les données du formulaire au serveur
+      const response = await fetch("http://localhost:3001/email/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nom,
+          prenom,
+          email,
+          telephone,
+          objet,
+          message,
+        }),
+      });
+
+      if (response.ok) {
+        // Vider le formulaire et afficher le message de succès
+        setNom("");
+        setPrenom("");
+        setEmail("");
+        setTelephone("");
+        setObjet("");
+        setMessage("");
+        setSuccessMessage("Votre message a été envoyé avec succès !");
+        setErrorMessage("");
+      } else {
+        // Afficher le message d'erreur si la requête a échoué
+        setErrorMessage("Une erreur s'est produite lors de l'envoi du message.");
+        setSuccessMessage("");
+      }
+    } catch (error) {
+      // Afficher le message d'erreur s'il y a une erreur lors de l'envoi
+      setErrorMessage("Une erreur s'est produite lors de l'envoi du message.");
+      setSuccessMessage("");
+    }
+  };
 
   return (
     <Layout>
@@ -31,7 +69,7 @@ export default function Contact() {
         <p className="required-message">
           Tous les champs marqués d'un astérisque (*) sont obligatoires.
         </p>
-        <Form /* onSubmit={handleSubmit}  */className="contact-form">
+        <Form className="contact-form" onSubmit={handleSubmit}>
           <Row>
             <Col>
               <Form.Group controlId="nom">
@@ -108,9 +146,10 @@ export default function Contact() {
           <Button type="submit" className="submit-button">
             Envoyer
           </Button>
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </Form>
       </Container>
     </Layout>
   );
 }
-

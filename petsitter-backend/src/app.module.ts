@@ -16,9 +16,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { CommentController } from './comments/comment.controller';
 import { CommentService } from './comments/comment.service';
 import { Comment } from './comments/comment.entity';
-import { EmailModule } from './email/email.module'; // Import the EmailModule here
-import { PaymentController } from './stripe/payment.controller'; // Import the PaymentController here
-import { StripeService } from './stripe/stripe.service'; // Import the StripeService here
+import { EmailModule } from './email/email.module';
+import { EmailController } from './email/email.controller'; // Importez le contrôleur EmailController ici
+import { PaymentController } from './stripe/payment.controller'; // Importez le contrôleur PaymentController ici
+import { StripeService } from './stripe/stripe.service'; // Importez le service StripeService ici
 
 @Module({
   imports: [
@@ -34,7 +35,7 @@ import { StripeService } from './stripe/stripe.service'; // Import the StripeSer
     }),
     TypeOrmModule.forFeature([User, Petsitter, Comment]),
     JwtModule.register({ secret: 'petsitterSecretKey' }),
-    EmailModule, // Add the EmailModule here
+    EmailModule, // Ajoutez le module EmailModule ici
   ],
   controllers: [
     AppController,
@@ -42,8 +43,9 @@ import { StripeService } from './stripe/stripe.service'; // Import the StripeSer
     PetsitterController,
     AuthController,
     CommentController,
-    PaymentController, // Add the PaymentController here
+    EmailController, // Ajoutez le contrôleur EmailController ici
+    PaymentController, // Ajoutez le contrôleur PaymentController ici
   ],
-  providers: [AppService, UserService, PetsitterService, AuthService, CommentService, StripeService], // Add the StripeService here
+  providers: [AppService, UserService, PetsitterService, AuthService, CommentService, StripeService], // Ajoutez le service StripeService ici
 })
 export class AppModule {}
