@@ -21,7 +21,7 @@ export default function Connexion() {
                   <h1>Connexion</h1>
                   <span>
                     Vous ne possédez pas de compte ?{" "}
-                    <Link href={"#"}>Inscrivez-vous ici</Link>
+                    <Link href={"/inscription"}>Inscrivez-vous ici</Link>
                   </span>
                 </div>
                 <Form.Group
