@@ -1,8 +1,6 @@
 // app.module.ts
 
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './users/user.controller';
 import { UserService } from './users/user.service';
@@ -17,9 +15,10 @@ import { CommentController } from './comments/comment.controller';
 import { CommentService } from './comments/comment.service';
 import { Comment } from './comments/comment.entity';
 import { EmailModule } from './email/email.module';
-import { EmailController } from './email/email.controller'; // Importez le contrôleur EmailController ici
-import { PaymentController } from './stripe/payment.controller'; // Importez le contrôleur PaymentController ici
-import { StripeService } from './stripe/stripe.service'; // Importez le service StripeService ici
+import { EmailController } from './email/email.controller';
+import { PaymentController } from './stripe/payment.controller';
+import { StripeService } from './stripe/stripe.service';
+import { AdminController } from './admin/admin.controller'; // Importez le contrôleur AdminController ici
 
 @Module({
   imports: [
@@ -30,22 +29,28 @@ import { StripeService } from './stripe/stripe.service'; // Importez le service 
       username: 'root',
       password: '',
       database: 'petsitter',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [User, Petsitter, Comment], // Assurez-vous d'ajouter toutes les entités nécessaires ici
       synchronize: true,
     }),
     TypeOrmModule.forFeature([User, Petsitter, Comment]),
     JwtModule.register({ secret: 'petsitterSecretKey' }),
-    EmailModule, // Ajoutez le module EmailModule ici
+    EmailModule,
   ],
   controllers: [
-    AppController,
     UserController,
     PetsitterController,
     AuthController,
     CommentController,
-    EmailController, // Ajoutez le contrôleur EmailController ici
-    PaymentController, // Ajoutez le contrôleur PaymentController ici
+    EmailController,
+    PaymentController,
+    AdminController, // Ajoutez le contrôleur AdminController ici
   ],
-  providers: [AppService, UserService, PetsitterService, AuthService, CommentService, StripeService], // Ajoutez le service StripeService ici
+  providers: [
+    UserService,
+    PetsitterService,
+    AuthService,
+    CommentService,
+    StripeService,
+  ],
 })
 export class AppModule {}

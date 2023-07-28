@@ -10,7 +10,7 @@ export class EmailService {
   constructor() {
     // Configurer le transporter avec les informations SMTP de votre serveur Office 365
     this.transporter = nodemailer.createTransport({
-      host: '',
+      host: 'smtp.office365.com',
       port: 587,
       secure: false,
       auth: {
@@ -35,7 +35,7 @@ export class EmailService {
   }
 
   async sendTestEmail(): Promise<void> {
-    const to = ''; // Remplacez par l'adresse e-mail du destinataire de test
+    const to = 'plancon.clem@gmail.com'; // Remplacez par l'adresse e-mail du destinataire de test
     const subject = 'Test d\'envoi d\'e-mail depuis Nest.js avec Nodemailer et Office 365';
     const text = 'Ceci est un test d\'envoi d\'e-mail depuis Nest.js avec Nodemailer et Office 365';
 

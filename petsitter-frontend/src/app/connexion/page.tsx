@@ -6,8 +6,10 @@ import Layout from "../Components/Laoyout";
 import Link from "next/link";
 import img_form from "../../../public/Images/devenir-petsitter.jpg";
 import jwtDecode from "jwt-decode"; // Import jwt-decode library
+import { adminCredentials } from "../credentials";
 
 export default function Connexion() {
+  const [isPetsitter, setIsPetsitter] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,7 +20,21 @@ export default function Connexion() {
     const password = formData.get("password") as string;
 
     try {
-      const response = await fetch("http://localhost:3001/auth/login/user", {
+          // Vérifier si l'utilisateur est l'administrateur
+          const isAdmin = firstName === adminCredentials.username && password === adminCredentials.password;
+
+          // Déterminer la route appropriée en fonction de l'état de la case à cocher et de l'identité de l'utilisateur
+          let loginRoute = "/auth/login/user";
+          if (isPetsitter) {
+            loginRoute = "/auth/login/petsitter";
+          } else if (isAdmin) {
+            const adminId = `${Date.now()}-${Math.random()}`;
+            localStorage.setItem("userId", adminId);
+            window.location.href = `/admin?adminId=${adminId}`;
+          }
+    
+
+      const response = await fetch(`http://localhost:3001${loginRoute}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,8 +56,12 @@ export default function Connexion() {
         localStorage.setItem("accessToken", token);
         localStorage.setItem("userId", userId.toString());
 
-        // Rediriger l'utilisateur vers la page de profil après la connexion
+       // Rediriger l'utilisateur vers la page de profil appropriée après la connexion
+      if (isPetsitter) {
+        window.location.href = "/profil_petsitter";
+      } else {
         window.location.href = "/profil_user";
+      }
       } else {
         // Gérer les cas d'erreur
         const data = await response.json();
@@ -79,8 +99,16 @@ export default function Connexion() {
                   <Form.Label>Mot de passe</Form.Label>
                   <Form.Control type="password" placeholder="Mot de passe"  name="password" />
                   <span className="forget_mdp">
-                    Mot de passe oublié ? <Link href={"#"}>Cliquez ici</Link>
+                    Mot de passe oublié ? <Link href={"/mdpoublie"}>Cliquez ici</Link>
                   </span>
+                </Form.Group>
+                <Form.Group controlId="isPetsitter" className="mb-3">
+                  <Form.Check
+                    type="checkbox"
+                    label="Je suis un petsitter"
+                    checked={isPetsitter}
+                    onChange={(e) => setIsPetsitter(e.target.checked)}
+                  />
                 </Form.Group>
                 <Button variant="primary" type="submit" className="btn-connection">
                   Se connecter

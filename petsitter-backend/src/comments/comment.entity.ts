@@ -15,9 +15,9 @@ export class Comment {
   @Column()
   note: number;
 
-  @ManyToOne(() => User, user => user.comments)
+  @ManyToOne(() => User, user => user.comments, { onDelete: 'CASCADE' })
   user: User;
 
-  @ManyToOne(() => Petsitter, petsitter => petsitter.comments)
+  @ManyToOne(() => Petsitter, petsitter => petsitter.comments, { onDelete: 'CASCADE' })
   petsitter: Petsitter;
 }

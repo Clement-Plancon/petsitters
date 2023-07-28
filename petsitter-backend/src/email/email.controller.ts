@@ -1,11 +1,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { EmailService } from './email.service';
+import { v4 as uuidv4 } from 'uuid'; // Importer la fonction uuidv4 pour générer un token aléatoire
 
-@Controller('email') // Le préfixe 'email' indique que cette route gérera les requêtes liées aux e-mails
+@Controller('email')
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
-  @Post('contact') // La route POST pour le formulaire de contact sera '/email/contact'
+  @Post('contact')
   async sendContactEmail(
     @Body('nom') nom: string,
     @Body('prenom') prenom: string,
@@ -14,9 +15,21 @@ export class EmailController {
     @Body('objet') objet: string,
     @Body('message') message: string,
   ): Promise<void> {
-    const to = ''; // Remplacez par l'adresse e-mail du destinataire de test
-    const subject = 'Formulaire de contact - Demande de garde d\'animaux';
+    const to = '';
+    const subject = 'Formulaire de contact - Demande de garde d\'animaux - The Pet Compagny';
     const text = `Nom: ${nom}\nPrénom: ${prenom}\nEmail: ${email}\nTéléphone: ${telephone}\nObjet: ${objet}\nMessage: ${message}`;
+
+    await this.emailService.sendEmail(to, subject, text);
+  }
+
+  @Post('mdpoublie')
+  async sendPasswordResetEmail(
+    @Body('email') email: string,
+  ): Promise<void> {
+    const to = email;
+    const subject = 'Réinitialisation du mot de passe - Demande de garde d\'animaux - The Pet Compagny';
+    const token = uuidv4(); // Générer un token aléatoire avec la fonction uuidv4
+    const text = `Bonjour,\n\nVous avez demandé la réinitialisation de votre mot de passe. Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe :\n\nhttp://localhost:3000/mdpoublie_reset?token=${token}\n\nSi vous n'avez pas demandé la réinitialisation de votre mot de passe, veuillez ignorer cet e-mail.\n\nCordialement,\nL'équipe de The Pet Compagny`;
 
     await this.emailService.sendEmail(to, subject, text);
   }
