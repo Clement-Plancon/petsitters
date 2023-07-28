@@ -466,7 +466,7 @@ export default function SearchPetsitter() {
                           />
                         </Form.Group>
                       </Form>
-                      <Button variant="primary" onClick={handleSubmit} className="btn-submit">
+                      <Button variant="primary" onClick={handleSubmit} className="btn-submit" href="/search_resultat">
                         Afficher les petssiters !
                       </Button>
                     </div>

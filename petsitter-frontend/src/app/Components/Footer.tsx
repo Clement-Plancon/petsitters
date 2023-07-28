@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react"; // Import the useEffect hook
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 import facebook from "../../../public/Icon/facebook.png";
@@ -8,6 +9,25 @@ import { Button, Container } from "react-bootstrap";
 import Link from "next/link";
 
 export default function Footer() {
+  // Function to load the reCAPTCHA script
+  const loadReCaptchaScript = () => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    document.body.appendChild(script);
+  };
+
+  // Load the reCAPTCHA script when the component mounts
+  useEffect(() => {
+    loadReCaptchaScript();
+  }, []);
+
+  // Function to handle form submission
+  const onSubmit = () => {
+    // Implement your form submission logic here
+    console.log("Form submitted!");
+  };
+
   return (
     <footer className="footer">
       <Container>
@@ -79,6 +99,21 @@ export default function Footer() {
             >
               S'inscrire en tant que petsiiter
             </Button>
+
+            {/* Google reCAPTCHA */}
+            <button
+              id="continueToSixthStep"
+              type="submit"
+              value="Envoyer"
+              name="submit"
+              className="g-recaptcha" // Add the class name for reCAPTCHA
+              data-sitekey="6Le7b8MkAAAAAJZU9-W-gpfO8_K8YVlo_x_Bq-iV" // Replace this with your actual reCAPTCHA site key
+              data-callback="onSubmit"
+              data-action="submit"
+              style={{ display: "none" }}
+            >
+              Envoyer le questionnaire
+            </button >
           </div>
         </div>
       </Container>

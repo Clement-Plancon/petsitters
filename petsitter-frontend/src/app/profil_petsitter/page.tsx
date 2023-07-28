@@ -270,6 +270,9 @@ export default function ProfilPetsitter() {
             <Button variant="primary" className="btn-contact-petsitter">
               Contacter ce pets-sitter
             </Button>
+            <Button variant="primary" className="btn-contact-petsitter" href="/paiement">
+              Payer le petsitter
+            </Button>
           </div>
         </section>
       </Container>
