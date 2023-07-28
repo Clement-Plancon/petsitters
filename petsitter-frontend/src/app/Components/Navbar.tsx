@@ -33,7 +33,12 @@ export default function NavbarHome() {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Button variant="primary" as="a" className="btn-nav">
+              <Button
+                variant="primary"
+                as="a"
+                href="/form_petsitter"
+                className="btn-nav"
+              >
                 Devenir Petsitter
               </Button>
               <Button href="/search-petsitter" variant="primary" as="a" className="btn-nav">
