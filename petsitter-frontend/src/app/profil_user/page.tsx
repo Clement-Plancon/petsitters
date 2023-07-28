@@ -2,7 +2,7 @@
 import { Breadcrumb, Button, Container, Form } from "react-bootstrap";
 import Layout from "../Components/Laoyout";
 import Image from "next/image";
-import img_user from "../../../public/Images/CAP-698x700.jpg";
+import img_user from "../../../public/Images/log.png";
 import { useState, useEffect } from "react";
 
 export default function ProfilUser() {

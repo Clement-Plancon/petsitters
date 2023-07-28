@@ -24,7 +24,22 @@ export class PetsitterService {
     const payload = { sub: petsitter.id, firstName: petsitter.firstName };
     return this.jwtService.sign(payload);
   }
+  async registerPetsitter(petsitterData: Partial<Petsitter>): Promise<Petsitter> {
+    // Assurez-vous que le nom d'utilisateur n'est pas déjà utilisé par un autre petsitter
+    const existingPetsitter = await this.petsitterRepository.findOne({
+      where: { firstName: petsitterData.firstName },
+    });
 
+    if (existingPetsitter) {
+      throw new Error('Ce nom d\'utilisateur est déjà utilisé.');
+    }
+
+    // Créez un nouvel objet Petsitter avec les données fournies
+    const newPetsitter = this.petsitterRepository.create(petsitterData);
+
+    // Enregistrez le nouvel objet Petsitter dans la base de données
+    return this.petsitterRepository.save(newPetsitter);
+  }
   async findByFirstName(firstName: string): Promise<Petsitter> {
     return this.petsitterRepository.findOne({ where: { firstName } });
   }
@@ -42,5 +57,32 @@ export class PetsitterService {
     return this.petsitterRepository.save(petsitter);
   }
 
-  // Ajoutez d'autres méthodes de service si nécessaire
+  async getAllPetsitters(): Promise<Petsitter[]> {
+    return this.petsitterRepository.find();
+  }
+  async deletePetsitter(petsitterId: number): Promise<void> {
+    const petsitter = await this.petsitterRepository.findOne({ where: { id: petsitterId } });
+
+    if (!petsitter) {
+      throw new NotFoundException('Petsitter introuvable');
+    }
+
+    await this.petsitterRepository.remove(petsitter);
+  }
+  async getPetsitterById(id: number): Promise<Petsitter> {
+    try {
+      const petsitter = await this.petsitterRepository.findOne({ where: { id } });
+  
+      if (!petsitter) {
+        throw new NotFoundException('Petsitter introuvable');
+      }
+  
+      return petsitter;
+    } catch (error) {
+      throw new NotFoundException('Erreur lors de la recherche du petsitter');
+    }
+  }
+  
+  
+  
 }

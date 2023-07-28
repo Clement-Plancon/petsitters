@@ -42,4 +42,17 @@ export class UserService {
     Object.assign(user, userData);
     return this.userRepository.save(user);
   }
+
+  async getAllUsers(): Promise<User[]> {
+    return this.userRepository.find();
+  }
+  async deleteUser(userId: number): Promise<void> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new NotFoundException('Utilisateur introuvable');
+    }
+
+    await this.userRepository.remove(user);
+  }
 }

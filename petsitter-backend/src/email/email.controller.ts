@@ -16,7 +16,7 @@ export class EmailController {
     @Body('message') message: string,
   ): Promise<void> {
     const to = '';
-    const subject = 'Formulaire de contact - Demande de garde d\'animaux';
+    const subject = 'Formulaire de contact - Demande de garde d\'animaux - The Pet Compagny';
     const text = `Nom: ${nom}\nPrénom: ${prenom}\nEmail: ${email}\nTéléphone: ${telephone}\nObjet: ${objet}\nMessage: ${message}`;
 
     await this.emailService.sendEmail(to, subject, text);
@@ -27,9 +27,9 @@ export class EmailController {
     @Body('email') email: string,
   ): Promise<void> {
     const to = email;
-    const subject = 'Réinitialisation du mot de passe - Demande de garde d\'animaux';
+    const subject = 'Réinitialisation du mot de passe - Demande de garde d\'animaux - The Pet Compagny';
     const token = uuidv4(); // Générer un token aléatoire avec la fonction uuidv4
-    const text = `Bonjour,\n\nVous avez demandé la réinitialisation de votre mot de passe. Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe :\n\nhttp://localhost:3000/mdpoublie_reset?token=${token}\n\nSi vous n'avez pas demandé la réinitialisation de votre mot de passe, veuillez ignorer cet e-mail.\n\nCordialement,\nL'équipe de garde d'animaux`;
+    const text = `Bonjour,\n\nVous avez demandé la réinitialisation de votre mot de passe. Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe :\n\nhttp://localhost:3000/mdpoublie_reset?token=${token}\n\nSi vous n'avez pas demandé la réinitialisation de votre mot de passe, veuillez ignorer cet e-mail.\n\nCordialement,\nL'équipe de The Pet Compagny`;
 
     await this.emailService.sendEmail(to, subject, text);
   }
