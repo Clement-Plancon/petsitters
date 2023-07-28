@@ -8,14 +8,15 @@
 @import "./Components/Presentation.scss";
 @import "./Components/ModesPetSitting.scss";
 @import "./Components/Footer.scss";
-@import "./Components/Connexion.scss";
-@import "./Components/Inscription.scss";
-@import "./Components/Paiement.scss";
-@import "./Components/contactezmoi.scss";
 
 /* IMPORT STYLE PAGES */
 @import "./Pages/ProfilUser.scss";
 @import "./Pages/ProfilPetsitter.scss";
+@import "./Components/contactezmoi.scss";
+@import "./Components/Connexion.scss";
+@import "./Components/Paiement.scss";
+@import "./Components/Inscription.scss";
+@import "./Pages/SearchPetsitter.scss";
 
 html,
 body {
