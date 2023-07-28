@@ -36,7 +36,7 @@ export default function NavbarHome() {
               <Button variant="primary" as="a" className="btn-nav">
                 Devenir Petsitter
               </Button>
-              <Button variant="primary" as="a" className="btn-nav">
+              <Button href="/search-petsitter" variant="primary" as="a" className="btn-nav">
                 Trouver un Petsitter
               </Button>
               <Nav.Link href="/contacteznous">Nous contacter</Nav.Link>

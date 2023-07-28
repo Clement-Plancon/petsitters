@@ -1,5 +1,6 @@
 "use client";
 import { Breadcrumb, Button, Container, Form } from "react-bootstrap";
+import { useState } from "react";
 import Layout from "../Components/Laoyout";
 import Stepper from "awesome-react-stepper";
 import Image from "next/image";
@@ -20,6 +21,69 @@ import icon_domicile from "../../../public/Icon/adresse-du-domicile.png";
 import icon_visites from "../../../public/Icon/gamelle-pour-chien.png";
 
 export default function SearchPetsitter() {
+  const [animalData, setAnimalData] = useState({
+    dogs: 0,
+    cats: 0,
+    rodents: 0,
+    fish: 0,
+    ferrets: 0,
+    farmAnimals: 0,
+    reptiles: 0,
+    horses: 0,
+    birds: 0,
+  });
+
+  const [needsData, setNeedsData] = useState({
+    familyHome: false,
+    walk: false,
+    atHome: false,
+    dailyVisit: false,
+  });
+
+  const [dateData, setDateData] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  const [contactData, setContactData] = useState({
+    email: "",
+  });
+
+  const handleSubmit = () => {
+    // Create an object with all the form data
+    const formData = {
+      animalData,
+      needsData,
+      dateData,
+      contactData,
+    };
+
+    // Send the form data to the server using fetch
+    fetch("http://localhost:3001/email/petsitter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        // Check if the response is successful
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        // If the response is successful, parse the JSON data
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the server response if needed
+        console.log("Server Response:", data);
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the fetch request
+        console.error("Error Sending Data:", error);
+      });
+  };
+
   return (
     <Layout>
       <section className="search-petsitter">
@@ -32,7 +96,7 @@ export default function SearchPetsitter() {
             submitBtn={<button className="stepperBtn">Valider</button>}
             continueBtn={<button className="stepperBtn">Suivant</button>}
             backBtn={<button className="stepperBtn">Précédant</button>}
-            // onSubmit={""}
+            onSubmit={handleSubmit}
           >
             <div className="stepperSubDiv">
               <div className="row">
@@ -40,154 +104,235 @@ export default function SearchPetsitter() {
                 <div className="content-row">
                   <Image src={dog} alt={""} className="icon-card" />
                   <span>Chiens</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de chiens que vous avez"
+                    value={animalData.dogs}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        dogs: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={cat} alt={""} className="icon-card" />
                   <span>Chats</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de chats que vous avez"
+                    value={animalData.cats}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        cats: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={rongeur} alt={""} className="icon-card" />
                   <span>Rongeurs</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de rongeurs que vous avez"
+                    value={animalData.rodents}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        rodents: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={fish} alt={""} className="icon-card" />
                   <span>Poissons</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de poissons que vous avez"
+                    value={animalData.fish}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        fish: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={furet} alt={""} className="icon-card" />
                   <span>Furets</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de furets que vous avez"
+                    value={animalData.ferrets}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        ferrets: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={poule} alt={""} className="icon-card" />
-                  <span>Animaux de la fermes</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <span>Animaux de la ferme</span>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre d'animaux de la ferme que vous avez"
+                    value={animalData.farmAnimals}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        farmAnimals: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={snake} alt={""} className="icon-card" />
                   <span>Reptiles</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de reptiles que vous avez"
+                    value={animalData.reptiles}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        reptiles: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={horse} alt={""} className="icon-card" />
                   <span>Chevaux</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre de chevaux que vous avez"
+                    value={animalData.horses}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        horses: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
                 <div className="content-row">
                   <Image src={bird} alt={""} className="icon-card" />
                   <span>Oiseaux</span>
-                  <Form.Select aria-label="Sélectionnez le nombre d'animaux que vous avez">
-                    <option>Aucun</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <Form.Select
+                    aria-label="Sélectionnez le nombre d'oiseaux que vous avez"
+                    value={animalData.birds}
+                    onChange={(e) =>
+                      setAnimalData({
+                        ...animalData,
+                        birds: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <option value={0}>Aucun</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
                   </Form.Select>
                 </div>
               </div>
@@ -198,10 +343,17 @@ export default function SearchPetsitter() {
                 <div className="cards">
                   <Form className="card">
                     <Image src={icon_famille} alt={""} className="icon-card" />
-                    <Form.Check // prettier-ignore
+                    <Form.Check
                       type={"checkbox"}
                       id={"default"}
                       label={"Chez une famille d'accueil"}
+                      checked={needsData.familyHome}
+                      onChange={(e) =>
+                        setNeedsData({
+                          ...needsData,
+                          familyHome: e.target.checked,
+                        })
+                      }
                     />
                   </Form>
                   <Form className="card">
@@ -210,26 +362,47 @@ export default function SearchPetsitter() {
                       alt={""}
                       className="icon-card"
                     />
-                    <Form.Check // prettier-ignore
+                    <Form.Check
                       type={"checkbox"}
                       id={"default"}
                       label={"Promenades"}
+                      checked={needsData.walk}
+                      onChange={(e) =>
+                        setNeedsData({
+                          ...needsData,
+                          walk: e.target.checked,
+                        })
+                      }
                     />
                   </Form>
                   <Form className="card">
                     <Image src={icon_domicile} alt={""} className="icon-card" />
-                    <Form.Check // prettier-ignore
+                    <Form.Check
                       type={"checkbox"}
                       id={"default"}
                       label={"A votre domicile"}
+                      checked={needsData.atHome}
+                      onChange={(e) =>
+                        setNeedsData({
+                          ...needsData,
+                          atHome: e.target.checked,
+                        })
+                      }
                     />
                   </Form>
                   <Form className="card">
                     <Image src={icon_visites} alt={""} className="icon-card" />
-                    <Form.Check // prettier-ignore
+                    <Form.Check
                       type={"checkbox"}
                       id={"default"}
                       label={"Visites quotidienne"}
+                      checked={needsData.dailyVisit}
+                      onChange={(e) =>
+                        setNeedsData({
+                          ...needsData,
+                          dailyVisit: e.target.checked,
+                        })
+                      }
                     />
                   </Form>
                 </div>
@@ -244,14 +417,27 @@ export default function SearchPetsitter() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label>Date de début</Form.Label>
-                    <Form.Control type="date" placeholder="name@example.com" />
+                    <Form.Control
+                      type="date"
+                      placeholder="name@example.com"
+                      value={dateData.startDate}
+                      onChange={(e) =>
+                        setDateData({ ...dateData, startDate: e.target.value })
+                      }
+                    />
                   </Form.Group>
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
                   >
                     <Form.Label>Date de fin</Form.Label>
-                    <Form.Control type="date" />
+                    <Form.Control
+                      type="date"
+                      value={dateData.endDate}
+                      onChange={(e) =>
+                        setDateData({ ...dateData, endDate: e.target.value })
+                      }
+                    />
                   </Form.Group>
                 </Form>
               </div>
@@ -273,10 +459,14 @@ export default function SearchPetsitter() {
                           <Form.Control
                             type="email"
                             placeholder="name@example.com"
+                            value={contactData.email}
+                            onChange={(e) =>
+                              setContactData({ ...contactData, email: e.target.value })
+                            }
                           />
                         </Form.Group>
                       </Form>
-                      <Button variant="primary" href="" className="btn-submit">
+                      <Button variant="primary" onClick={handleSubmit} className="btn-submit">
                         Afficher les petssiters !
                       </Button>
                     </div>

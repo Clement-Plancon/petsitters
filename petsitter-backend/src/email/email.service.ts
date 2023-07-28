@@ -14,8 +14,8 @@ export class EmailService {
       port: 587,
       secure: false,
       auth: {
-        user: '', // Remplacez par votre adresse e-mail Office 365
-        pass: '', // Remplacez par votre mot de passe e-mail
+        user: 'c.plancon@insta.fr', // Remplacez par votre adresse e-mail Office 365
+        pass: 'SofocleCours123$', // Remplacez par votre mot de passe e-mail
       },
     });
   }
@@ -23,7 +23,7 @@ export class EmailService {
   async sendEmail(to: string, subject: string, text: string): Promise<void> {
     try {
       await this.transporter.sendMail({
-        from: '', // Remplacez par votre adresse e-mail Office 365
+        from: 'c.plancon@insta.fr', // Remplacez par votre adresse e-mail Office 365
         to,
         subject,
         text,
