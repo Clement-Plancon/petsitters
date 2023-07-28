@@ -15,7 +15,7 @@ export class EmailController {
     @Body('objet') objet: string,
     @Body('message') message: string,
   ): Promise<void> {
-    const to = 'plancon.clem@gmail.com';
+    const to = '';
     const subject = 'Formulaire de contact - Demande de garde d\'animaux - The Pet Compagny';
     const text = `Nom: ${nom}\nPrénom: ${prenom}\nEmail: ${email}\nTéléphone: ${telephone}\nObjet: ${objet}\nMessage: ${message}`;
 

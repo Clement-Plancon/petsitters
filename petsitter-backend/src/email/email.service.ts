@@ -14,8 +14,8 @@ export class EmailService {
       port: 587,
       secure: false,
       auth: {
-        user: 'c.plancon@insta.fr', // Remplacez par votre adresse e-mail Office 365
-        pass: 'SofocleCours123$', // Remplacez par votre mot de passe e-mail
+        user: '', // Remplacez par votre adresse e-mail Office 365
+        pass: '', // Remplacez par votre mot de passe e-mail
       },
     });
   }
@@ -23,7 +23,7 @@ export class EmailService {
   async sendEmail(to: string, subject: string, text: string): Promise<void> {
     try {
       await this.transporter.sendMail({
-        from: 'c.plancon@insta.fr', // Remplacez par votre adresse e-mail Office 365
+        from: '', // Remplacez par votre adresse e-mail Office 365
         to,
         subject,
         text,
@@ -35,7 +35,7 @@ export class EmailService {
   }
 
   async sendTestEmail(): Promise<void> {
-    const to = 'plancon.clem@gmail.com'; // Remplacez par l'adresse e-mail du destinataire de test
+    const to = ''; // Remplacez par l'adresse e-mail du destinataire de test
     const subject = 'Test d\'envoi d\'e-mail depuis Nest.js avec Nodemailer et Office 365';
     const text = 'Ceci est un test d\'envoi d\'e-mail depuis Nest.js avec Nodemailer et Office 365';
 
